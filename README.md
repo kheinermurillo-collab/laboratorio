@@ -66,12 +66,12 @@
 
 - Todo se configura con **PowerShell**. La interfaz gráfica aparece solo para **comprobar** lo que hizo PowerShell, o cuando no hay un comando equivalente: las asignaciones de unidades (8.3.2) y el inicio de sesión del usuario (9.4). Esos títulos dicen **Solo interfaz gráfica**.
 - Ejecuta PowerShell **como administrador**. Si un comando no se reconoce en PowerShell 7, ejecútalo en **Windows PowerShell 5.1**, que viene con Windows Server y Windows 10.
-- Cada sección tiene **su propio color**, que se repite en sus pasos, viñetas, tablas y bloques de código. Los colores, tamaños y márgenes se ven en la **vista previa de VS Code** (`Ctrl+Shift+V`, o `Ctrl+K V` para verla al lado del texto) y se adaptan al tema claro u oscuro.
+- Los identificadores de pasos y los tipos de instrucción se muestran con **formato Markdown** para que sean legibles en GitHub, VS Code y otros visores. GitHub controla los colores y el tema visual del README; no se depende de clases CSS ni de estilos personalizados que la plataforma pueda ignorar.
 - Los comandos van en **recuadros numerados**. Copia cada recuadro **completo** y pégalo en PowerShell (clic derecho o `Ctrl+V`); si la última línea queda escrita sin ejecutarse, pulsa **Enter**. Dentro de un recuadro, cada comando lleva encima un comentario (`# …`) que dice qué hace; PowerShell ignora esas líneas.
-  - <span class="pega">pegar todo junto</span> El recuadro tiene varios comandos que pueden pegarse **a la vez**: PowerShell los ejecuta uno tras otro, en el orden en que aparecen.
+  - **[Pegar todo junto]** El recuadro tiene varios comandos que pueden pegarse **a la vez**: PowerShell los ejecuta uno tras otro, en el orden en que aparecen.
   - Sin esa etiqueta, el recuadro tiene **un solo comando**. Algunos dicen **Pégalo solo**: reinician el equipo, pueden pedir una respuesta S/N o muestran algo que debes leer antes de seguir. Si los pegaras junto con otros, la línea siguiente se tomaría como respuesta o no llegaría a ejecutarse.
-  - <span class="orden sec">secuencial</span> Configura algo. Pega estos recuadros en el orden de su número, cada uno cuando termine el anterior, y en la misma ventana: si un recuadro define una variable (`$base`, `$raiz`…), los siguientes la necesitan.
-  - <span class="orden ind">comprobación</span> Solo consulta. Pégalo después de los recuadros secuenciales del mismo paso.
+  - **[Secuencial]** Configura algo. Pega estos recuadros en el orden de su número, cada uno cuando termine el anterior, y en la misma ventana: si un recuadro define una variable (`$base`, `$raiz`…), los siguientes la necesitan.
+  - **[Comprobación]** Solo consulta. Pégalo después de los recuadros secuenciales del mismo paso.
   - Cuando un paso tiene varios recuadros, la nota **Orden de ejecución** que aparece encima indica la secuencia.
 - Los comandos se copian tal cual; solo cambia lo que el texto indique (por ejemplo, el nombre del adaptador de red). El texto después de `#` al final de una línea es un comentario con el resultado esperado.
 
@@ -138,15 +138,15 @@ Un controlador de dominio necesita IP fija, un nombre definitivo y su propia IP 
 
 #### 2.1.1 — PowerShell (como administrador)
 
-<span class="nota-orden">Orden de ejecución</span> Pega **2.1.1.1** → **2.1.1.2** en este orden, cada recuadro cuando termine el anterior.
+**Orden de ejecución:** Pega **2.1.1.1** → **2.1.1.2** en este orden, cada recuadro cuando termine el anterior.
 
-<span class="cmd">2.1.1.1</span><span class="orden sec">secuencial</span> **Pégalo solo** y mira el resultado: muestra los adaptadores de red. Si el tuyo no se llama *Ethernet*, cambia ese nombre en el recuadro siguiente antes de pegarlo.
+**`2.1.1.1`** **[Secuencial]** **Pégalo solo** y mira el resultado: muestra los adaptadores de red. Si el tuyo no se llama *Ethernet*, cambia ese nombre en el recuadro siguiente antes de pegarlo.
 
 ```powershell
 Get-NetAdapter   # nombre del adaptador, normalmente "Ethernet"
 ```
 
-<span class="cmd">2.1.1.2</span><span class="orden sec">secuencial</span><span class="pega">pegar todo junto</span> IP fija, DNS, zona horaria y nombre del equipo. La última línea **reinicia el servidor**, por eso va al final.
+**`2.1.1.2`** **[Secuencial]** **[Pegar todo junto]** IP fija, DNS, zona horaria y nombre del equipo. La última línea **reinicia el servidor**, por eso va al final.
 
 ```powershell
 # Asigna la IP fija, la máscara y la puerta de enlace
@@ -164,7 +164,7 @@ Rename-Computer -NewName "SRV-DC01" -Restart
 
 Después del reinicio:
 
-<span class="cmd">2.1.1.3</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> Comprueba el nombre, la red y la zona horaria.
+**`2.1.1.3`** **[Comprobación]** **[Pegar todo junto]** Comprueba el nombre, la red y la zona horaria.
 
 ```powershell
 # Nombre del equipo
@@ -182,8 +182,8 @@ Get-TimeZone | Select-Object DisplayName   # (UTC-05:00) Bogotá, Lima, Quito...
 
 #### 2.1.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">2.1.2.1</span> **Administrador del servidor → Servidor local**: *Nombre del equipo* = `SRV-DC01`, *Ethernet* = `192.168.10.10` y *Zona horaria* = **(UTC-05:00) Bogotá, Lima, Quito**.
-- <span class="paso">2.1.2.2</span> **Win + R** → `ncpa.cpl` → clic derecho en **Ethernet** → **Propiedades** → **Protocolo de Internet versión 4 (TCP/IPv4)** → **Propiedades**: *Usar la siguiente dirección IP* con los valores del paso 2.1.1 y *Servidor DNS preferido* = `127.0.0.1`.
+- **`2.1.2.1`** **Administrador del servidor → Servidor local**: *Nombre del equipo* = `SRV-DC01`, *Ethernet* = `192.168.10.10` y *Zona horaria* = **(UTC-05:00) Bogotá, Lima, Quito**.
+- **`2.1.2.2`** **Win + R** → `ncpa.cpl` → clic derecho en **Ethernet** → **Propiedades** → **Protocolo de Internet versión 4 (TCP/IPv4)** → **Propiedades**: *Usar la siguiente dirección IP* con los valores del paso 2.1.1 y *Servidor DNS preferido* = `127.0.0.1`.
 
 ![Propiedades de Ethernet en Windows Server 2022](https://www.layerstack.com/img/docs/resources/windows22staticip5.png)
 
@@ -199,15 +199,15 @@ Al promover el servidor como primer DC de un bosque nuevo, se instala y configur
 
 #### 3.1.1 — PowerShell (como administrador)
 
-<span class="nota-orden">Orden de ejecución</span> Pega primero **3.1.1.1** y espera a que termine; después, la comprobación **3.1.1.2**.
+**Orden de ejecución:** Pega primero **3.1.1.1** y espera a que termine; después, la comprobación **3.1.1.2**.
 
-<span class="cmd">3.1.1.1</span><span class="orden sec">secuencial</span> Instala el rol AD DS con sus consolas de administración. Tarda unos minutos.
+**`3.1.1.1`** **[Secuencial]** Instala el rol AD DS con sus consolas de administración. Tarda unos minutos.
 
 ```powershell
 Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
 ```
 
-<span class="cmd">3.1.1.2</span><span class="orden ind">comprobación</span> Comprueba que el rol quedó instalado.
+**`3.1.1.2`** **[Comprobación]** Comprueba que el rol quedó instalado.
 
 ```powershell
 Get-WindowsFeature AD-Domain-Services   # Install State = Installed
@@ -215,14 +215,14 @@ Get-WindowsFeature AD-Domain-Services   # Install State = Installed
 
 #### 3.1.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">3.1.2.1</span> **Administrador del servidor → Panel**: en el panel izquierdo aparece **AD DS**, lo que confirma que el rol quedó instalado.
-- <span class="paso">3.1.2.2</span> La bandera de notificaciones muestra un aviso con el enlace **Promover este servidor a controlador de dominio**. **No hagas clic en él**: la promoción se hace con PowerShell en el paso 3.2.
+- **`3.1.2.1`** **Administrador del servidor → Panel**: en el panel izquierdo aparece **AD DS**, lo que confirma que el rol quedó instalado.
+- **`3.1.2.2`** La bandera de notificaciones muestra un aviso con el enlace **Promover este servidor a controlador de dominio**. **No hagas clic en él**: la promoción se hace con PowerShell en el paso 3.2.
 
 ### 3.2 Promover a controlador de dominio
 
 #### 3.2.1 — PowerShell (como administrador)
 
-<span class="cmd">3.2.1.1</span> Crea el bosque y el dominio `iudigital.local` con DNS. Es **un solo comando** en cuatro líneas (las tres primeras terminan en `` ` ``): **pégalo solo**, porque pide la contraseña DSRM y después reinicia el servidor.
+**`3.2.1.1`** Crea el bosque y el dominio `iudigital.local` con DNS. Es **un solo comando** en cuatro líneas (las tres primeras terminan en `` ` ``): **pégalo solo**, porque pide la contraseña DSRM y después reinicia el servidor.
 
 ```powershell
 Install-ADDSForest `
@@ -233,7 +233,7 @@ Install-ADDSForest `
 
 `WinThreshold` es el nivel funcional **Windows Server 2016**, el más alto disponible en Windows Server 2022. El servidor se reinicia solo; después inicia sesión como `IUDIGITAL\Administrador` y ejecuta:
 
-<span class="cmd">3.2.1.2</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> Comprueba el dominio, el bosque y los servicios.
+**`3.2.1.2`** **[Comprobación]** **[Pegar todo junto]** Comprueba el dominio, el bosque y los servicios.
 
 ```powershell
 # Nombre del dominio, nombre NetBIOS y nivel funcional del dominio
@@ -248,14 +248,14 @@ Get-Service NTDS, DNS, Netlogon, ADWS | Select-Object Name, Status   # todos Run
 
 #### 3.2.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">3.2.2.1</span> **Administrador del servidor**: en el panel izquierdo aparecen **AD DS** y **DNS**.
-- <span class="paso">3.2.2.2</span> **Herramientas → Dominios y confianzas de Active Directory** → clic derecho en `iudigital.local` → **Propiedades**: *Nivel funcional del dominio* y *Nivel funcional del bosque* = **Windows Server 2016** (figura 3).
+- **`3.2.2.1`** **Administrador del servidor**: en el panel izquierdo aparecen **AD DS** y **DNS**.
+- **`3.2.2.2`** **Herramientas → Dominios y confianzas de Active Directory** → clic derecho en `iudigital.local` → **Propiedades**: *Nivel funcional del dominio* y *Nivel funcional del bosque* = **Windows Server 2016** (figura 3).
 
 ![Propiedades del dominio con los niveles funcionales del dominio y del bosque](https://petri.com/wp-content/uploads/2026/01/2026-01-16_09-57-56-1024x703.png)
 
 *Figura 3. Ventana **Properties** (*Propiedades*) del dominio, pestaña **General**: *Domain functional level* y *Forest functional level* (*Nivel funcional del dominio* y *Nivel funcional del bosque*) = **Windows Server 2016**, como debe verse en `iudigital.local`. El autor la abrió desde *Usuarios y equipos de Active Directory* (clic derecho en el dominio → *Propiedades*); desde *Dominios y confianzas de Active Directory* se abre la misma ventana. Fuente: [Petri — Active Directory Functional Levels Explained](https://petri.com/active-directory-functional-levels/). Interfaz en inglés.*
 
-- <span class="paso">3.2.2.3</span> **Herramientas → Usuarios y equipos de Active Directory** → `iudigital.local` → **Domain Controllers**: aparece `SRV-DC01`.
+- **`3.2.2.3`** **Herramientas → Usuarios y equipos de Active Directory** → `iudigital.local` → **Domain Controllers**: aparece `SRV-DC01`.
 
 ---
 
@@ -267,7 +267,7 @@ La zona directa `iudigital.local` ya existe después de la promoción. Faltan la
 
 #### 4.1.1 — PowerShell
 
-<span class="cmd">4.1.1.1</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> Revisa las zonas y los registros A y SRV.
+**`4.1.1.1`** **[Comprobación]** **[Pegar todo junto]** Revisa las zonas y los registros A y SRV.
 
 ```powershell
 # Lista las zonas del servidor DNS
@@ -284,21 +284,21 @@ Debe aparecer la zona `iudigital.local`, el registro A `srv-dc01` → `192.168.1
 
 #### 4.1.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">4.1.2.1</span> **Herramientas → DNS → SRV-DC01 → Zonas de búsqueda directa → iudigital.local**: registros **SOA**, **NS** y **A** (`srv-dc01 → 192.168.10.10`) y las carpetas `_msdcs`, `_sites`, `_tcp` y `_udp`, como en la figura 18.
+- **`4.1.2.1`** **Herramientas → DNS → SRV-DC01 → Zonas de búsqueda directa → iudigital.local**: registros **SOA**, **NS** y **A** (`srv-dc01 → 192.168.10.10`) y las carpetas `_msdcs`, `_sites`, `_tcp` y `_udp`, como en la figura 18.
 
 ### 4.2 Crear la zona inversa
 
 #### 4.2.1 — PowerShell (como administrador)
 
-<span class="nota-orden">Orden de ejecución</span> Pega primero **4.2.1.1** y espera a que termine; después, la comprobación **4.2.1.2**.
+**Orden de ejecución:** Pega primero **4.2.1.1** y espera a que termine; después, la comprobación **4.2.1.2**.
 
-<span class="cmd">4.2.1.1</span><span class="orden sec">secuencial</span> Crea la zona inversa integrada en AD, con actualizaciones seguras.
+**`4.2.1.1`** **[Secuencial]** Crea la zona inversa integrada en AD, con actualizaciones seguras.
 
 ```powershell
 Add-DnsServerPrimaryZone -NetworkId "192.168.10.0/24" -ReplicationScope "Domain" -DynamicUpdate Secure
 ```
 
-<span class="cmd">4.2.1.2</span><span class="orden ind">comprobación</span> Comprueba la zona creada.
+**`4.2.1.2`** **[Comprobación]** Comprueba la zona creada.
 
 ```powershell
 Get-DnsServerZone -Name "10.168.192.in-addr.arpa" | Select-Object ZoneName, IsDsIntegrated, DynamicUpdate
@@ -306,16 +306,16 @@ Get-DnsServerZone -Name "10.168.192.in-addr.arpa" | Select-Object ZoneName, IsDs
 
 #### 4.2.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">4.2.2.1</span> **Herramientas → DNS → SRV-DC01 → Zonas de búsqueda inversa**: aparece `10.168.192.in-addr.arpa`.
-- <span class="paso">4.2.2.2</span> Clic derecho en la zona → **Propiedades** → pestaña **General**: *Tipo* = **Integrada en Active Directory** y *Actualizaciones dinámicas* = **Solo seguras**.
+- **`4.2.2.1`** **Herramientas → DNS → SRV-DC01 → Zonas de búsqueda inversa**: aparece `10.168.192.in-addr.arpa`.
+- **`4.2.2.2`** Clic derecho en la zona → **Propiedades** → pestaña **General**: *Tipo* = **Integrada en Active Directory** y *Actualizaciones dinámicas* = **Solo seguras**.
 
 ### 4.3 Crear el PTR del servidor
 
 #### 4.3.1 — PowerShell (como administrador)
 
-<span class="nota-orden">Orden de ejecución</span> Pega primero **4.3.1.1** y espera a que termine; después, la comprobación **4.3.1.2**.
+**Orden de ejecución:** Pega primero **4.3.1.1** y espera a que termine; después, la comprobación **4.3.1.2**.
 
-<span class="cmd">4.3.1.1</span><span class="orden sec">secuencial</span> Crea el registro PTR del servidor.
+**`4.3.1.1`** **[Secuencial]** Crea el registro PTR del servidor.
 
 ```powershell
 Add-DnsServerResourceRecordPtr -ZoneName "10.168.192.in-addr.arpa" -Name "10" -PtrDomainName "srv-dc01.iudigital.local"
@@ -323,7 +323,7 @@ Add-DnsServerResourceRecordPtr -ZoneName "10.168.192.in-addr.arpa" -Name "10" -P
 
 Si responde que el registro ya existe, el servidor lo registró solo al crear la zona: no es un error, sigue con la comprobación.
 
-<span class="cmd">4.3.1.2</span><span class="orden ind">comprobación</span> Comprueba el PTR.
+**`4.3.1.2`** **[Comprobación]** Comprueba el PTR.
 
 ```powershell
 Get-DnsServerResourceRecord -ZoneName "10.168.192.in-addr.arpa" -RRType Ptr
@@ -331,21 +331,21 @@ Get-DnsServerResourceRecord -ZoneName "10.168.192.in-addr.arpa" -RRType Ptr
 
 #### 4.3.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">4.3.2.1</span> En la zona `10.168.192.in-addr.arpa` aparece un **Puntero (PTR)** `192.168.10.10` → `srv-dc01.iudigital.local`, como en la parte superior de la figura 15.
+- **`4.3.2.1`** En la zona `10.168.192.in-addr.arpa` aparece un **Puntero (PTR)** `192.168.10.10` → `srv-dc01.iudigital.local`, como en la parte superior de la figura 15.
 
 ### 4.4 Reenviadores (opcional)
 
 #### 4.4.1 — PowerShell (como administrador)
 
-<span class="nota-orden">Orden de ejecución</span> Pega primero **4.4.1.1** y espera a que termine; después, la comprobación **4.4.1.2**.
+**Orden de ejecución:** Pega primero **4.4.1.1** y espera a que termine; después, la comprobación **4.4.1.2**.
 
-<span class="cmd">4.4.1.1</span><span class="orden sec">secuencial</span> Configura los reenviadores.
+**`4.4.1.1`** **[Secuencial]** Configura los reenviadores.
 
 ```powershell
 Set-DnsServerForwarder -IPAddress 8.8.8.8, 1.1.1.1
 ```
 
-<span class="cmd">4.4.1.2</span><span class="orden ind">comprobación</span> Comprueba los reenviadores.
+**`4.4.1.2`** **[Comprobación]** Comprueba los reenviadores.
 
 ```powershell
 Get-DnsServerForwarder
@@ -353,7 +353,7 @@ Get-DnsServerForwarder
 
 #### 4.4.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">4.4.2.1</span> **Herramientas → DNS** → clic derecho en `SRV-DC01` → **Propiedades** → pestaña **Reenviadores**: aparecen `8.8.8.8` y `1.1.1.1`.
+- **`4.4.2.1`** **Herramientas → DNS** → clic derecho en `SRV-DC01` → **Propiedades** → pestaña **Reenviadores**: aparecen `8.8.8.8` y `1.1.1.1`.
 
 ![Pestaña Reenviadores en las propiedades del servidor DNS](https://learn.microsoft.com/en-us/training/wwl-windows-server/implement-windows-server-dns/media/m12-dns-3.png)
 
@@ -369,9 +369,9 @@ El DHCP entrega a cada cliente su IP, la puerta de enlace y, lo más importante,
 
 #### 5.1.1 — PowerShell (como administrador)
 
-<span class="nota-orden">Orden de ejecución</span> Pega primero **5.1.1.1** y espera a que termine; después, la comprobación **5.1.1.2**.
+**Orden de ejecución:** Pega primero **5.1.1.1** y espera a que termine; después, la comprobación **5.1.1.2**.
 
-<span class="cmd">5.1.1.1</span><span class="orden sec">secuencial</span><span class="pega">pegar todo junto</span> Instala el rol DHCP, crea sus grupos de seguridad, lo autoriza en AD y quita el aviso del Administrador del servidor. La instalación tarda unos minutos; las líneas siguientes esperan a que termine.
+**`5.1.1.1`** **[Secuencial]** **[Pegar todo junto]** Instala el rol DHCP, crea sus grupos de seguridad, lo autoriza en AD y quita el aviso del Administrador del servidor. La instalación tarda unos minutos; las líneas siguientes esperan a que termine.
 
 ```powershell
 # Instala el rol DHCP con su consola
@@ -390,7 +390,7 @@ Add-DhcpServerInDC -DnsName "srv-dc01.iudigital.local" -IPAddress 192.168.10.10
 Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\ServerManager\Roles\12 -Name ConfigurationState -Value 2
 ```
 
-<span class="cmd">5.1.1.2</span><span class="orden ind">comprobación</span> Comprueba la autorización.
+**`5.1.1.2`** **[Comprobación]** Comprueba la autorización.
 
 ```powershell
 Get-DhcpServerInDC   # debe listar srv-dc01.iudigital.local
@@ -400,21 +400,21 @@ La línea `Set-ItemProperty` quita el aviso *Completar la configuración de DHCP
 
 #### 5.1.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">5.1.2.1</span> **Herramientas → DHCP** → `srv-dc01.iudigital.local`: el nodo **IPv4** tiene una **marca verde**, es decir, el servidor está autorizado. Si muestra una flecha roja, repite `Add-DhcpServerInDC`.
+- **`5.1.2.1`** **Herramientas → DHCP** → `srv-dc01.iudigital.local`: el nodo **IPv4** tiene una **marca verde**, es decir, el servidor está autorizado. Si muestra una flecha roja, repite `Add-DhcpServerInDC`.
 
 ![Consola DHCP con el nodo IPv4 y los nodos del ámbito](https://learn.microsoft.com/en-us/training/wwl-windows-server/deploy-manage-dynamic-host-configuration-protocol/media/m11-dynamic-host-configuration-protocol-1.png)
 
 *Figura 5. Consola **DHCP** con el servidor `sea-dc1`: el nodo **IPv4** con el icono verde (servidor autorizado) y, debajo, el ámbito con *Address Pool* (*Grupo de direcciones*), *Address Leases* (*Concesiones de direcciones*), *Reservations* (*Reservas*) y *Scope Options* (*Opciones de ámbito*), los nodos que revisarás en el paso 5.2.2. En tu servidor el nodo es `srv-dc01.iudigital.local` y el ámbito, `[192.168.10.0] LAN-IUDigital`. Fuente: [Microsoft Learn — Install and configure the DHCP role](https://learn.microsoft.com/en-us/training/modules/deploy-manage-dynamic-host-configuration-protocol/3-install-configure-dynamic-host-configuration-protocol). Interfaz en inglés.*
 
-- <span class="paso">5.1.2.2</span> La bandera de notificaciones del Administrador del servidor no muestra el aviso *Completar la configuración de DHCP*.
+- **`5.1.2.2`** La bandera de notificaciones del Administrador del servidor no muestra el aviso *Completar la configuración de DHCP*.
 
 ### 5.2 Crear el ámbito
 
 #### 5.2.1 — PowerShell (como administrador)
 
-<span class="nota-orden">Orden de ejecución</span> Pega primero **5.2.1.1** y espera a que termine; después, la comprobación **5.2.1.2**.
+**Orden de ejecución:** Pega primero **5.2.1.1** y espera a que termine; después, la comprobación **5.2.1.2**.
 
-<span class="cmd">5.2.1.1</span><span class="orden sec">secuencial</span><span class="pega">pegar todo junto</span> Crea el ámbito, la exclusión y las opciones.
+**`5.2.1.1`** **[Secuencial]** **[Pegar todo junto]** Crea el ámbito, la exclusión y las opciones.
 
 ```powershell
 # Crea el ámbito LAN-IUDigital y lo activa
@@ -427,7 +427,7 @@ Add-DhcpServerv4ExclusionRange -ScopeId 192.168.10.0 -StartRange 192.168.10.100 
 Set-DhcpServerv4OptionValue -ScopeId 192.168.10.0 -Router 192.168.10.1 -DnsServer 192.168.10.10 -DnsDomain "iudigital.local"
 ```
 
-<span class="cmd">5.2.1.2</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> Comprueba el ámbito, la exclusión y las opciones.
+**`5.2.1.2`** **[Comprobación]** **[Pegar todo junto]** Comprueba el ámbito, la exclusión y las opciones.
 
 ```powershell
 # Muestra el ámbito
@@ -442,9 +442,9 @@ Get-DhcpServerv4OptionValue -ScopeId 192.168.10.0
 
 #### 5.2.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">5.2.2.1</span> **Herramientas → DHCP → srv-dc01.iudigital.local → IPv4**: el ámbito **[192.168.10.0] LAN-IUDigital** está **Activo**, como en la figura 17.
-- <span class="paso">5.2.2.2</span> **Grupo de direcciones**: intervalo `192.168.10.100` – `192.168.10.200` y exclusión `192.168.10.100` – `192.168.10.110`.
-- <span class="paso">5.2.2.3</span> **Opciones de ámbito**: `003 Enrutador` = `192.168.10.1`, `006 Servidores DNS` = `192.168.10.10` y `015 Nombre de dominio DNS` = `iudigital.local`.
+- **`5.2.2.1`** **Herramientas → DHCP → srv-dc01.iudigital.local → IPv4**: el ámbito **[192.168.10.0] LAN-IUDigital** está **Activo**, como en la figura 17.
+- **`5.2.2.2`** **Grupo de direcciones**: intervalo `192.168.10.100` – `192.168.10.200` y exclusión `192.168.10.100` – `192.168.10.110`.
+- **`5.2.2.3`** **Opciones de ámbito**: `003 Enrutador` = `192.168.10.1`, `006 Servidores DNS` = `192.168.10.10` y `015 Nombre de dominio DNS` = `iudigital.local`.
 
 ---
 
@@ -466,9 +466,9 @@ Las GPO se vinculan a unidades organizativas (OU), no a los contenedores predete
 
 #### 6.2.1 — PowerShell (como administrador)
 
-<span class="nota-orden">Orden de ejecución</span> Pega **6.2.1.1** → **6.2.1.2** en este orden, cada recuadro cuando termine el anterior; después, la comprobación **6.2.1.3**.
+**Orden de ejecución:** Pega **6.2.1.1** → **6.2.1.2** en este orden, cada recuadro cuando termine el anterior; después, la comprobación **6.2.1.3**.
 
-<span class="cmd">6.2.1.1</span><span class="orden sec">secuencial</span><span class="pega">pegar todo junto</span> Crea las OU y los grupos.
+**`6.2.1.1`** **[Secuencial]** **[Pegar todo junto]** Crea las OU y los grupos.
 
 ```powershell
 # Define la variable con el dominio; la usan todos los comandos siguientes
@@ -487,7 +487,7 @@ New-ADGroup -Name "GG_Estudiantes" -GroupScope Global -GroupCategory Security -P
 New-ADGroup -Name "GG_Docentes"    -GroupScope Global -GroupCategory Security -Path "OU=Grupos,OU=IUDigital,$base"
 ```
 
-<span class="cmd">6.2.1.2</span><span class="orden sec">secuencial</span><span class="pega">pegar todo junto</span> Pide la contraseña inicial, crea los usuarios con ella y los agrega a sus grupos. Al pegar el recuadro aparece *Contraseña inicial*: escríbela (no se ve mientras la escribes) y pulsa **Enter**; los comandos siguientes continúan solos. Los comandos `New-ADUser` ocupan varias líneas (terminan en `` ` ``): el recuadro se copia entero.
+**`6.2.1.2`** **[Secuencial]** **[Pegar todo junto]** Pide la contraseña inicial, crea los usuarios con ella y los agrega a sus grupos. Al pegar el recuadro aparece *Contraseña inicial*: escríbela (no se ve mientras la escribes) y pulsa **Enter**; los comandos siguientes continúan solos. Los comandos `New-ADUser` ocupan varias líneas (terminan en `` ` ``): el recuadro se copia entero.
 
 ```powershell
 # Pide la contraseña inicial de los usuarios y la guarda en $clave
@@ -509,7 +509,7 @@ Add-ADGroupMember -Identity "GG_Estudiantes" -Members "bienestaru"
 Add-ADGroupMember -Identity "GG_Docentes"    -Members "jdocente"
 ```
 
-<span class="cmd">6.2.1.3</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> Comprueba las OU y los miembros de los grupos.
+**`6.2.1.3`** **[Comprobación]** **[Pegar todo junto]** Comprueba las OU y los miembros de los grupos.
 
 ```powershell
 # Lista las OU creadas
@@ -524,9 +524,9 @@ Get-ADGroupMember GG_Docentes    | Select-Object SamAccountName   # jdocente
 
 #### 6.2.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">6.2.2.1</span> **Herramientas → Usuarios y equipos de Active Directory** → `iudigital.local → IUDigital`: aparecen las OU **Usuarios**, **Equipos** y **Grupos**, como en la figura 19.
-- <span class="paso">6.2.2.2</span> En **Grupos**, doble clic en `GG_Estudiantes` → pestaña **Miembros**: `Bienestar Universitario`. En `GG_Docentes`: `Docente Prueba`.
-- <span class="paso">6.2.2.3</span> En **Usuarios**, doble clic en `Bienestar Universitario` → pestaña **Cuenta**: *Nombre de inicio de sesión* = `bienestaru@iudigital.local`.
+- **`6.2.2.1`** **Herramientas → Usuarios y equipos de Active Directory** → `iudigital.local → IUDigital`: aparecen las OU **Usuarios**, **Equipos** y **Grupos**, como en la figura 19.
+- **`6.2.2.2`** En **Grupos**, doble clic en `GG_Estudiantes` → pestaña **Miembros**: `Bienestar Universitario`. En `GG_Docentes`: `Docente Prueba`.
+- **`6.2.2.3`** En **Usuarios**, doble clic en `Bienestar Universitario` → pestaña **Cuenta**: *Nombre de inicio de sesión* = `bienestaru@iudigital.local`.
 
 ---
 
@@ -552,9 +552,9 @@ Por la red se aplica el permiso **más restrictivo** entre el del recurso compar
 
 El script resuelve los grupos integrados por su SID, así funciona con Windows en español o en inglés. Si ya habías creado las carpetas con una versión anterior de esta guía, puedes ejecutarlo igual: quita los permisos anteriores de los grupos antes de asignar los nuevos.
 
-<span class="nota-orden">Orden de ejecución</span> Pega primero **7.2.1.1** y espera a que termine; después, la comprobación **7.2.1.2**.
+**Orden de ejecución:** Pega primero **7.2.1.1** y espera a que termine; después, la comprobación **7.2.1.2**.
 
-<span class="cmd">7.2.1.1</span><span class="orden sec">secuencial</span><span class="pega">pegar todo junto</span> Crea las carpetas, las comparte y asigna los permisos NTFS. El bloque `ForEach-Object { … }` es un solo comando: el recuadro se copia entero.
+**`7.2.1.1`** **[Secuencial]** **[Pegar todo junto]** Crea las carpetas, las comparte y asigna los permisos NTFS. El bloque `ForEach-Object { … }` es un solo comando: el recuadro se copia entero.
 
 ```powershell
 # Variables: Usuarios autentificados y Administradores (por su SID),
@@ -594,7 +594,7 @@ icacls "$raiz\Publico"     /grant "${est}:(OI)(CI)RX"
 icacls "$raiz\Estudiantes" /grant "${est}:(OI)(CI)RX" "${est}:(W)" "*S-1-3-0:(OI)(CI)(IO)M"
 ```
 
-<span class="cmd">7.2.1.2</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> Comprueba los recursos compartidos y los permisos.
+**`7.2.1.2`** **[Comprobación]** **[Pegar todo junto]** Comprueba los recursos compartidos y los permisos.
 
 ```powershell
 # Muestra los tres recursos compartidos y su modo de enumeración
@@ -614,7 +614,7 @@ En la salida de `icacls`, `GG_Docentes` debe tener dos líneas, `(RX,W)` y `(OI)
 
 Para comprobar que nadie, salvo los administradores, puede borrar las carpetas:
 
-<span class="cmd">7.2.1.3</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> Define las variables y muestra quién puede borrar cada carpeta: la columna `PuedeBorrarla` debe ser **False** en todas las filas, y en `C:\Compartidos` solo deben aparecer **Administradores** y **SYSTEM**.
+**`7.2.1.3`** **[Comprobación]** **[Pegar todo junto]** Define las variables y muestra quién puede borrar cada carpeta: la columna `PuedeBorrarla` debe ser **False** en todas las filas, y en `C:\Compartidos` solo deben aparecer **Administradores** y **SYSTEM**.
 
 ```powershell
 # Define las variables: la carpeta raíz y los permisos que se van a buscar
@@ -639,29 +639,29 @@ foreach ($c in "Publico","Docentes","Estudiantes") {
 
 #### 7.2.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">7.2.2.1</span> En el **Explorador de archivos**, clic derecho en `C:\Compartidos\Docentes` → **Propiedades** → pestaña **Compartir**: *Ruta de acceso de red* = `\\SRV-DC01\Docentes`.
+- **`7.2.2.1`** En el **Explorador de archivos**, clic derecho en `C:\Compartidos\Docentes` → **Propiedades** → pestaña **Compartir**: *Ruta de acceso de red* = `\\SRV-DC01\Docentes`.
 
 ![Pestaña Compartir de las propiedades de una carpeta compartida](https://cdn.sanity.io/images/r09655ln/production/2f34aac247116486bb032ed42120824c18973d3a-356x480.png)
 
 *Figura 6. Pestaña **Sharing** (*Compartir*) de una carpeta compartida: *Network Path* (*Ruta de acceso de red*) y el botón **Advanced Sharing…** (*Uso compartido avanzado*). En tu servidor la ruta será `\\SRV-DC01\Docentes`. Fuente: [Netwrix — NTFS vs. Share Permissions](https://netwrix.com/en/resources/blog/ntfs-vs-share-permissions/). Interfaz en inglés.*
 
-- <span class="paso">7.2.2.2</span> **Uso compartido avanzado**: *Compartir esta carpeta* está marcada.
+- **`7.2.2.2`** **Uso compartido avanzado**: *Compartir esta carpeta* está marcada.
 
-- <span class="paso">7.2.2.3</span> **Permisos**: solo **Usuarios autentificados** y **Administradores**, ambos con *Control total*.
+- **`7.2.2.3`** **Permisos**: solo **Usuarios autentificados** y **Administradores**, ambos con *Control total*.
 
 ![Permisos del recurso compartido con Usuarios autentificados y Administradores](https://activedirectorypro.com/images/posts/ntfs-vs-share-permissions/ntfs-vs-share-permissions-2.png)
 
 *Figura 7. **Permissions for share** (*Permisos del recurso*) con *Authenticated Users* (*Usuarios autentificados*) y *Administrators* (*Administradores*), los mismos grupos del laboratorio. En la captura *Authenticated Users* tiene solo *Read*; en tu servidor los dos deben tener *Full Control* (*Control total*), y no debe aparecer *Everyone* (*Todos*). Fuente: [ActiveDirectoryPro — NTFS vs Share Permissions](https://activedirectorypro.com/ntfs-vs-share-permissions/). Interfaz en inglés.*
 
-- <span class="paso">7.2.2.4</span> Pestaña **Seguridad → Opciones avanzadas**: la herencia está deshabilitada y hay dos entradas para `GG_Docentes`, una con *Se aplica a* = **Solo esta carpeta** (sin *Eliminar*) y otra con **Solo subcarpetas y archivos** (*Modificar*). En `Estudiantes`, además, **CREATOR OWNER** con *Modificar* en **Solo subcarpetas y archivos**.
+- **`7.2.2.4`** Pestaña **Seguridad → Opciones avanzadas**: la herencia está deshabilitada y hay dos entradas para `GG_Docentes`, una con *Se aplica a* = **Solo esta carpeta** (sin *Eliminar*) y otra con **Solo subcarpetas y archivos** (*Modificar*). En `Estudiantes`, además, **CREATOR OWNER** con *Modificar* en **Solo subcarpetas y archivos**.
 
 ![Pestaña Seguridad de una carpeta con el botón Opciones avanzadas](https://activedirectorypro.com/images/posts/ntfs-vs-share-permissions/ntfs-vs-share-permissions-1.png)
 
 *Figura 8. Pestaña **Security** (*Seguridad*) de una carpeta: la lista de grupos (aquí, entre otros, *CREATOR OWNER* y *Authenticated Users*) y el botón **Advanced** (*Opciones avanzadas*), que abre la configuración de seguridad avanzada. Fuente: [ActiveDirectoryPro](https://activedirectorypro.com/ntfs-vs-share-permissions/). Interfaz en inglés.*
 
-- <span class="paso">7.2.2.5</span> Haz doble clic en la entrada de `GG_Docentes` que dice **Solo esta carpeta**: se abre **Entrada de permiso**, donde la casilla *Eliminar* debe estar desmarcada. En la otra entrada, la de **Solo subcarpetas y archivos**, *Eliminar* sí está marcada.
-- <span class="paso">7.2.2.6</span> En **Opciones avanzadas** → pestaña **Acceso efectivo** → **Seleccionar un usuario** → `jdocente` → **Ver acceso efectivo**: *Eliminar* aparece con una **X roja** en `Publico`, `Docentes` y `Estudiantes`. Repite en `Estudiantes` con `bienestaru`, y en `C:\Compartidos` con los dos usuarios: ahí también *Eliminar subcarpetas y archivos* debe tener la X roja.
-- <span class="paso">7.2.2.7</span> **Administrador del servidor → Servicios de archivos y de almacenamiento → Recursos compartidos** → clic derecho en `Docentes` → **Propiedades → Configuración**: *Habilitar la enumeración basada en el acceso* está marcada (figura 9).
+- **`7.2.2.5`** Haz doble clic en la entrada de `GG_Docentes` que dice **Solo esta carpeta**: se abre **Entrada de permiso**, donde la casilla *Eliminar* debe estar desmarcada. En la otra entrada, la de **Solo subcarpetas y archivos**, *Eliminar* sí está marcada.
+- **`7.2.2.6`** En **Opciones avanzadas** → pestaña **Acceso efectivo** → **Seleccionar un usuario** → `jdocente` → **Ver acceso efectivo**: *Eliminar* aparece con una **X roja** en `Publico`, `Docentes` y `Estudiantes`. Repite en `Estudiantes` con `bienestaru`, y en `C:\Compartidos` con los dos usuarios: ahí también *Eliminar subcarpetas y archivos* debe tener la X roja.
+- **`7.2.2.7`** **Administrador del servidor → Servicios de archivos y de almacenamiento → Recursos compartidos** → clic derecho en `Docentes` → **Propiedades → Configuración**: *Habilitar la enumeración basada en el acceso* está marcada (figura 9).
 
 ![Propiedades de un recurso compartido en el Administrador del servidor con la enumeración basada en el acceso habilitada](https://woshub.com/wp-content/uploads/2019/01/server-manager-share-enable-access-based-enumeration.jpg.webp)
 
@@ -686,9 +686,9 @@ foreach ($c in "Publico","Docentes","Estudiantes") {
 
 #### 8.2.1 — PowerShell (como administrador)
 
-<span class="nota-orden">Orden de ejecución</span> Pega primero **8.2.1.1** y espera a que termine; después, la comprobación **8.2.1.2**.
+**Orden de ejecución:** Pega primero **8.2.1.1** y espera a que termine; después, la comprobación **8.2.1.2**.
 
-<span class="cmd">8.2.1.1</span><span class="orden sec">secuencial</span><span class="pega">pegar todo junto</span> Configura la directiva de contraseñas y crea, vincula y configura las dos GPO.
+**`8.2.1.1`** **[Secuencial]** **[Pegar todo junto]** Configura la directiva de contraseñas y crea, vincula y configura las dos GPO.
 
 ```powershell
 # Carga el módulo de directivas de grupo
@@ -730,7 +730,7 @@ Set-GPRegistryValue -Name "GPO_Seguridad_Equipos" -Key $k -ValueName legalnotice
 Set-GPRegistryValue -Name "GPO_Seguridad_Equipos" -Key $k -ValueName DontDisplayLastUserName -Type DWord -Value 1
 ```
 
-<span class="cmd">8.2.1.2</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> Comprueba la directiva de contraseñas y los vínculos de las GPO.
+**`8.2.1.2`** **[Comprobación]** **[Pegar todo junto]** Comprueba la directiva de contraseñas y los vínculos de las GPO.
 
 ```powershell
 # Directiva de contraseñas del dominio
@@ -745,7 +745,7 @@ Get-ADDefaultDomainPasswordPolicy
 
 #### 8.2.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">8.2.2.1</span> **Herramientas → Administración de directivas de grupo** → `iudigital.local → IUDigital`: bajo **Usuarios** aparece vinculada `GPO_Restricciones_Usuarios`, y bajo **Equipos**, `GPO_Seguridad_Equipos` (figura 11).
+- **`8.2.2.1`** **Herramientas → Administración de directivas de grupo** → `iudigital.local → IUDigital`: bajo **Usuarios** aparece vinculada `GPO_Restricciones_Usuarios`, y bajo **Equipos**, `GPO_Seguridad_Equipos` (figura 11).
 
 ![Abrir Administración de directivas de grupo desde Herramientas](https://cdn.sanity.io/images/r09655ln/production/69299f12cf6ecb4e21f894cd9d53811c9d5a3cbc-1024x441.jpg)
 
@@ -755,15 +755,15 @@ Get-ADDefaultDomainPasswordPolicy
 
 *Figura 11. Consola **Group Policy Management** (*Administración de directivas de grupo*): en el árbol, cada OU muestra debajo las GPO vinculadas (aquí *Marketing → Marketing Department Desktop Settings*), y la pestaña **Linked Group Policy Objects** (*Objetos de directiva de grupo vinculados*) lista las del dominio. En tu consola, `GPO_Restricciones_Usuarios` debe colgar de `Usuarios` y `GPO_Seguridad_Equipos`, de `Equipos`. Fuente: [Microsoft Learn — Define GPOs](https://learn.microsoft.com/en-us/training/modules/implement-group-policy-objects/2-define-gpos). Interfaz en inglés.*
 
-- <span class="paso">8.2.2.2</span> Selecciona `GPO_Restricciones_Usuarios` → pestaña **Configuración** → **Mostrar todo**: en *Configuración de usuario → Directivas → Plantillas administrativas* aparecen las tres directivas como **Habilitada**.
-- <span class="paso">8.2.2.3</span> Selecciona `GPO_Seguridad_Equipos` → pestaña **Configuración**: los tres valores (`legalnoticecaption`, `legalnoticetext` y `DontDisplayLastUserName`) aparecen bajo *Configuración adicional del Registro*, porque PowerShell los guarda como valores del Registro. En el cliente tienen el mismo efecto que configurarlos en *Opciones de seguridad*.
-- <span class="paso">8.2.2.4</span> Selecciona `Default Domain Policy` → pestaña **Configuración**: en *Directivas de cuenta* aparecen los valores de contraseña y de bloqueo de la tabla 8.1.
+- **`8.2.2.2`** Selecciona `GPO_Restricciones_Usuarios` → pestaña **Configuración** → **Mostrar todo**: en *Configuración de usuario → Directivas → Plantillas administrativas* aparecen las tres directivas como **Habilitada**.
+- **`8.2.2.3`** Selecciona `GPO_Seguridad_Equipos` → pestaña **Configuración**: los tres valores (`legalnoticecaption`, `legalnoticetext` y `DontDisplayLastUserName`) aparecen bajo *Configuración adicional del Registro*, porque PowerShell los guarda como valores del Registro. En el cliente tienen el mismo efecto que configurarlos en *Opciones de seguridad*.
+- **`8.2.2.4`** Selecciona `Default Domain Policy` → pestaña **Configuración**: en *Directivas de cuenta* aparecen los valores de contraseña y de bloqueo de la tabla 8.1.
 
 ### 8.3 Mapeo de unidades
 
 #### 8.3.1 — PowerShell (como administrador): crear y vincular la GPO
 
-<span class="cmd">8.3.1.1</span> Crea `GPO_Mapeo_Unidades` y la vincula a la OU `Usuarios`.
+**`8.3.1.1`** Crea `GPO_Mapeo_Unidades` y la vincula a la OU `Usuarios`.
 
 ```powershell
 New-GPO -Name "GPO_Mapeo_Unidades" | New-GPLink -Target "OU=Usuarios,OU=IUDigital,DC=iudigital,DC=local"
@@ -773,16 +773,16 @@ New-GPO -Name "GPO_Mapeo_Unidades" | New-GPLink -Target "OU=Usuarios,OU=IUDigita
 
 Las asignaciones de unidades son *preferencias* de directiva de grupo y no tienen cmdlet; se configuran en el editor.
 
-- <span class="paso">8.3.2.1</span> En **Administración de directivas de grupo**, clic derecho en `GPO_Mapeo_Unidades` → **Editar**.
-- <span class="paso">8.3.2.2</span> Ve a *Configuración de usuario → Preferencias → Configuración de Windows → Asignaciones de unidades* → **Nuevo → Unidad asignada**.
-- <span class="paso">8.3.2.3</span> Acción **Actualizar**, ubicación `\\SRV-DC01\Publico`, letra **S:** → **Aceptar**.
-- <span class="paso">8.3.2.4</span> Repite con `\\SRV-DC01\Docentes` y la letra **T:**. En la pestaña **Común** marca **Destino de nivel de elemento** → **Grupo de seguridad** → `IUDIGITAL\GG_Docentes`, para que solo los docentes reciban `T:`.
-- <span class="paso">8.3.2.5</span> Repite con `\\SRV-DC01\Estudiantes` y la letra **U:**. En **Destino de nivel de elemento** agrega dos elementos **Grupo de seguridad**: `IUDIGITAL\GG_Estudiantes` y `IUDIGITAL\GG_Docentes`. Selecciona el segundo y, en **Opciones de elemento**, cámbialo a **O**, para que `U:` la reciba cualquiera de los dos grupos.
+- **`8.3.2.1`** En **Administración de directivas de grupo**, clic derecho en `GPO_Mapeo_Unidades` → **Editar**.
+- **`8.3.2.2`** Ve a *Configuración de usuario → Preferencias → Configuración de Windows → Asignaciones de unidades* → **Nuevo → Unidad asignada**.
+- **`8.3.2.3`** Acción **Actualizar**, ubicación `\\SRV-DC01\Publico`, letra **S:** → **Aceptar**.
+- **`8.3.2.4`** Repite con `\\SRV-DC01\Docentes` y la letra **T:**. En la pestaña **Común** marca **Destino de nivel de elemento** → **Grupo de seguridad** → `IUDIGITAL\GG_Docentes`, para que solo los docentes reciban `T:`.
+- **`8.3.2.5`** Repite con `\\SRV-DC01\Estudiantes` y la letra **U:**. En **Destino de nivel de elemento** agrega dos elementos **Grupo de seguridad**: `IUDIGITAL\GG_Estudiantes` y `IUDIGITAL\GG_Docentes`. Selecciona el segundo y, en **Opciones de elemento**, cámbialo a **O**, para que `U:` la reciba cualquiera de los dos grupos.
 
 #### 8.3.3 — Comprobar en la interfaz gráfica
 
-- <span class="paso">8.3.3.1</span> Selecciona `GPO_Mapeo_Unidades` → pestaña **Configuración** → **Mostrar todo**: en *Configuración de usuario → Preferencias → Asignaciones de unidades* aparecen `S:`, `T:` y `U:`, con el destino de nivel de elemento de `T:` y `U:`.
-- <span class="paso">8.3.3.2</span> La prueba en el cliente está en las secciones 10.5 y 10.6.
+- **`8.3.3.1`** Selecciona `GPO_Mapeo_Unidades` → pestaña **Configuración** → **Mostrar todo**: en *Configuración de usuario → Preferencias → Asignaciones de unidades* aparecen `S:`, `T:` y `U:`, con el destino de nivel de elemento de `T:` y `U:`.
+- **`8.3.3.2`** La prueba en el cliente está en las secciones 10.5 y 10.6.
 
 ---
 
@@ -794,9 +794,9 @@ El cliente solo encuentra el dominio si su DNS es `192.168.10.10`. Si recibe la 
 
 Inicia sesión en el cliente con su administrador local y abre PowerShell como administrador.
 
-<span class="nota-orden">Orden de ejecución</span> Pega **9.1.1** (IP por DHCP) **o** **9.1.2** (IP a mano), y espera a que termine; después, la comprobación **9.1.3**.
+**Orden de ejecución:** Pega **9.1.1** (IP por DHCP) **o** **9.1.2** (IP a mano), y espera a que termine; después, la comprobación **9.1.3**.
 
-<span class="cmd">9.1.1</span><span class="orden sec">secuencial</span><span class="pega">pegar todo junto</span> Con la IP por DHCP: renueva la IP del cliente y muestra la configuración: IP `192.168.10.1xx` y DNS `192.168.10.10`.
+**`9.1.1`** **[Secuencial]** **[Pegar todo junto]** Con la IP por DHCP: renueva la IP del cliente y muestra la configuración: IP `192.168.10.1xx` y DNS `192.168.10.10`.
 
 ```powershell
 # Libera la IP actual
@@ -809,13 +809,13 @@ ipconfig /renew
 ipconfig /all
 ```
 
-<span class="cmd">9.1.2</span><span class="orden sec">secuencial</span> Solo si **no** usas DHCP y configuras la IP del cliente a mano: además de la IP, el DNS debe ser el DC. Cambia *Ethernet* si tu adaptador tiene otro nombre (`Get-NetAdapter`).
+**`9.1.2`** **[Secuencial]** Solo si **no** usas DHCP y configuras la IP del cliente a mano: además de la IP, el DNS debe ser el DC. Cambia *Ethernet* si tu adaptador tiene otro nombre (`Get-NetAdapter`).
 
 ```powershell
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.10.10
 ```
 
-<span class="cmd">9.1.3</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> Comprueba que el servidor responde y que el cliente resuelve el dominio.
+**`9.1.3`** **[Comprobación]** **[Pegar todo junto]** Comprueba que el servidor responde y que el cliente resuelve el dominio.
 
 ```powershell
 # Comprueba que el servidor responde
@@ -829,7 +829,7 @@ nslookup iudigital.local
 
 #### 9.2.1 — PowerShell (en el cliente, como administrador)
 
-<span class="cmd">9.2.1.1</span> Une el equipo al dominio con el nombre `CLI-W10-01` y lo **reinicia**.
+**`9.2.1.1`** Une el equipo al dominio con el nombre `CLI-W10-01` y lo **reinicia**.
 
 ```powershell
 Add-Computer -DomainName "iudigital.local" -NewName "CLI-W10-01" -Credential IUDIGITAL\Administrador -Restart
@@ -837,7 +837,7 @@ Add-Computer -DomainName "iudigital.local" -NewName "CLI-W10-01" -Credential IUD
 
 Después del reinicio:
 
-<span class="cmd">9.2.1.2</span> Nombre del equipo, dominio y pertenencia al dominio.
+**`9.2.1.2`** Nombre del equipo, dominio y pertenencia al dominio.
 
 ```powershell
 (Get-CimInstance Win32_ComputerSystem) | Select-Object Name, Domain, PartOfDomain   # CLI-W10-01, iudigital.local, True
@@ -845,13 +845,13 @@ Después del reinicio:
 
 #### 9.2.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">9.2.2.1</span> **Win + R** → `sysdm.cpl` → **Aceptar**.
+- **`9.2.2.1`** **Win + R** → `sysdm.cpl` → **Aceptar**.
 
 ![Propiedades del sistema con sysdm.cpl](https://cdn.techloris.com/app/uploads/2022/10/sysdm-cpl.png)
 
 *Figura 12. **Win + R** abre *Ejecutar*; escribe `sysdm.cpl` → **Aceptar** para abrir *Propiedades del sistema*. Fuente: [TechLoris](https://techloris.com/join-domains-in-windows-10/).*
 
-- <span class="paso">9.2.2.2</span> Pestaña **Nombre de equipo**: *Nombre completo del equipo* = `CLI-W10-01.iudigital.local` y *Dominio* = `iudigital.local`.
+- **`9.2.2.2`** Pestaña **Nombre de equipo**: *Nombre completo del equipo* = `CLI-W10-01.iudigital.local` y *Dominio* = `iudigital.local`.
 
 ![Pestaña Nombre de equipo de Propiedades del sistema con el dominio](https://adamtheautomator.com/wp-content/uploads/2021/04/Untitled-2021-04-07T103248.287.png)
 
@@ -863,15 +863,15 @@ Tras unirse, el equipo aparece en el contenedor **Computers**.
 
 #### 9.3.1 — PowerShell (en el servidor)
 
-<span class="nota-orden">Orden de ejecución</span> Pega primero **9.3.1.1** y espera a que termine; después, la comprobación **9.3.1.2**.
+**Orden de ejecución:** Pega primero **9.3.1.1** y espera a que termine; después, la comprobación **9.3.1.2**.
 
-<span class="cmd">9.3.1.1</span><span class="orden sec">secuencial</span> Mueve el equipo a la OU `Equipos`.
+**`9.3.1.1`** **[Secuencial]** Mueve el equipo a la OU `Equipos`.
 
 ```powershell
 Get-ADComputer CLI-W10-01 | Move-ADObject -TargetPath "OU=Equipos,OU=IUDigital,DC=iudigital,DC=local"
 ```
 
-<span class="cmd">9.3.1.2</span><span class="orden ind">comprobación</span> Comprueba su nueva ubicación.
+**`9.3.1.2`** **[Comprobación]** Comprueba su nueva ubicación.
 
 ```powershell
 Get-ADComputer CLI-W10-01 | Select-Object DistinguishedName   # ...OU=Equipos,OU=IUDigital,...
@@ -879,7 +879,7 @@ Get-ADComputer CLI-W10-01 | Select-Object DistinguishedName   # ...OU=Equipos,OU
 
 #### 9.3.2 — Comprobar en la interfaz gráfica
 
-- <span class="paso">9.3.2.1</span> **Usuarios y equipos de Active Directory** → `IUDigital → Equipos`: aparece `CLI-W10-01`, y ya no está en **Computers**.
+- **`9.3.2.1`** **Usuarios y equipos de Active Directory** → `IUDigital → Equipos`: aparece `CLI-W10-01`, y ya no está en **Computers**.
 
 ![Equipo dentro de una OU en Usuarios y equipos de Active Directory](https://techdirectarchive.com/wp-content/uploads/2020/04/screenshot-2020-04-06-at-14.45.41.png)
 
@@ -899,7 +899,7 @@ La práctica queda aprobada cuando se cumplen tres cosas: AD DS responde con sus
 
 ### 10.1 Active Directory (en el servidor)
 
-<span class="cmd">10.1.1</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> Datos del dominio y del DC, servicios, recursos compartidos, OU del cliente y permisos de SYSVOL.
+**`10.1.1`** **[Comprobación]** **[Pegar todo junto]** Datos del dominio y del DC, servicios, recursos compartidos, OU del cliente y permisos de SYSVOL.
 
 ```powershell
 # Datos del dominio y DC que tiene el rol de emulador PDC
@@ -957,7 +957,7 @@ Si la primera línea de `nslookup` dice *Servidor: UnKnown*, falta la zona inver
 
 ### 10.4 Cliente conectado al dominio
 
-<span class="cmd">10.4.1</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> Dominio, usuario, DC que validó el inicio de sesión, canal seguro y pertenencia al dominio.
+**`10.4.1`** **[Comprobación]** **[Pegar todo junto]** Dominio, usuario, DC que validó el inicio de sesión, canal seguro y pertenencia al dominio.
 
 ```powershell
 # Dominio al que pertenece el equipo (en Windows en inglés, cambia "Dominio" por "Domain")
@@ -988,15 +988,15 @@ Resultado esperado: *Dominio: iudigital.local*, `$env:LOGONSERVER` = `\\SRV-DC01
 
 **Dónde:** en el cliente, con la sesión de `IUDIGITAL\bienestaru` abierta. Las GPO de usuario se comprueban sobre él, porque `Administrador` no está en la OU `Usuarios`.
 
-<span class="nota-orden">Orden de ejecución</span> Pega primero **10.5.1** y espera a que termine; después, la comprobación **10.5.2**.
+**Orden de ejecución:** Pega primero **10.5.1** y espera a que termine; después, la comprobación **10.5.2**.
 
-<span class="cmd">10.5.1</span><span class="orden sec">secuencial</span> En PowerShell **normal** (sin ejecutar como administrador; `cmd` está bloqueado para `bienestaru`). **Pégalo solo**: aplica de inmediato las GPO. Si pregunta si quieres cerrar la sesión o reiniciar, responde **N**; si lo pegaras junto con otros comandos, la línea siguiente se tomaría como respuesta.
+**`10.5.1`** **[Secuencial]** En PowerShell **normal** (sin ejecutar como administrador; `cmd` está bloqueado para `bienestaru`). **Pégalo solo**: aplica de inmediato las GPO. Si pregunta si quieres cerrar la sesión o reiniciar, responde **N**; si lo pegaras junto con otros comandos, la línea siguiente se tomaría como respuesta.
 
 ```powershell
 gpupdate /force
 ```
 
-<span class="cmd">10.5.2</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> En PowerShell **como administrador**: clic derecho → *Ejecutar como administrador* y, cuando Windows pida credenciales, usa `IUDIGITAL\Administrador`. Sin elevar, `gpresult` solo muestra la parte del usuario; elevado con otra cuenta, mostraría el usuario Administrador, por eso se indica `/user IUDIGITAL\bienestaru`.
+**`10.5.2`** **[Comprobación]** **[Pegar todo junto]** En PowerShell **como administrador**: clic derecho → *Ejecutar como administrador* y, cuando Windows pida credenciales, usa `IUDIGITAL\Administrador`. Sin elevar, `gpresult` solo muestra la parte del usuario; elevado con otra cuenta, mostraría el usuario Administrador, por eso se indica `/user IUDIGITAL\bienestaru`.
 
 ```powershell
 # Resumen de las GPO aplicadas al equipo y a bienestaru
@@ -1211,7 +1211,7 @@ Addresses:  ...
 
 Si prefieres una captura de PowerShell:
 
-<span class="cmd">10.7.6.1</span><span class="orden ind">comprobación</span><span class="pega">pegar todo junto</span> OU, usuarios, miembros de `GG_Estudiantes` y OU del equipo cliente.
+**`10.7.6.1`** **[Comprobación]** **[Pegar todo junto]** OU, usuarios, miembros de `GG_Estudiantes` y OU del equipo cliente.
 
 ```powershell
 # OU de IUDigital
@@ -1233,8 +1233,8 @@ Get-ADComputer CLI-W10-01 | Select DistinguishedName   # ...OU=Equipos,OU=IUDigi
 
 **Dónde:** en el cliente.
 
-- <span class="paso">10.7.7.1</span> **Win + R → `sysdm.cpl`**, pestaña **Nombre de equipo**: *Dominio* = `iudigital.local` (figura 13). Al unir el equipo con `Add-Computer` no aparece el mensaje *Bienvenido al dominio*; esta captura lo reemplaza.
-- <span class="paso">10.7.7.2</span> En PowerShell como administrador:
+- **`10.7.7.1`** **Win + R → `sysdm.cpl`**, pestaña **Nombre de equipo**: *Dominio* = `iudigital.local` (figura 13). Al unir el equipo con `Add-Computer` no aparece el mensaje *Bienvenido al dominio*; esta captura lo reemplaza.
+- **`10.7.7.2`** En PowerShell como administrador:
 
 ```text
 PS C:\> Test-ComputerSecureChannel

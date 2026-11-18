@@ -66,7 +66,6 @@
 
 - Todo se configura con **PowerShell**. La interfaz gráfica aparece solo para **comprobar** lo que hizo PowerShell, o cuando no hay un comando equivalente: las asignaciones de unidades (8.3.2) y el inicio de sesión del usuario (9.4). Esos títulos dicen **Solo interfaz gráfica**.
 - Ejecuta PowerShell **como administrador**. Si un comando no se reconoce en PowerShell 7, ejecútalo en **Windows PowerShell 5.1**, que viene con Windows Server y Windows 10.
-- Los identificadores de pasos y los tipos de instrucción se muestran con **formato Markdown** para que sean legibles en GitHub, VS Code y otros visores. GitHub controla los colores y el tema visual del README; no se depende de clases CSS ni de estilos personalizados que la plataforma pueda ignorar.
 - Los comandos van en **recuadros numerados**. Copia cada recuadro **completo** y pégalo en PowerShell (clic derecho o `Ctrl+V`); si la última línea queda escrita sin ejecutarse, pulsa **Enter**. Dentro de un recuadro, cada comando lleva encima un comentario (`# …`) que dice qué hace; PowerShell ignora esas líneas.
   - **[Pegar todo junto]** El recuadro tiene varios comandos que pueden pegarse **a la vez**: PowerShell los ejecuta uno tras otro, en el orden en que aparecen.
   - Sin esa etiqueta, el recuadro tiene **un solo comando**. Algunos dicen **Pégalo solo**: reinician el equipo, pueden pedir una respuesta S/N o muestran algo que debes leer antes de seguir. Si los pegaras junto con otros, la línea siguiente se tomaría como respuesta o no llegaría a ejecutarse.
@@ -79,9 +78,7 @@
 >
 > - Todas las capturas están en **inglés**, y varias son de Windows Server 2016 o 2019; las consolas (*Administrador del servidor*, *DHCP*, *DNS*, *Usuarios y equipos de Active Directory*, *Administración de directivas de grupo*) son iguales en Windows Server 2022. Las ventanas de Windows Server 2022 en español tienen los mismos campos y en el mismo orden. Debajo de cada imagen se indica el texto equivalente en español.
 > - Los nombres de dominio y las IP de las capturas son los del autor de cada tutorial. **Usa siempre los de la tabla de la sección 1.1.**
-> - **Verificación (17/11/2026):** se abrieron en un navegador las 24 imágenes y se comprobó que cada una muestra el paso o el resultado descrito en su pie. Cuando una captura difiere de este laboratorio (por ejemplo, un DNS 8.8.8.8, otra versión de Windows Server o una opción distinta marcada), el pie lo indica.
-> - **Dónde se ven:** en la prueba cargaron todas, tanto pidiéndolas desde otro sitio web como sin indicar la página de origen, así que deberían verse en GitHub, VS Code, Typora, Obsidian o publicadas en una página web. Las de Windows OS Hub están en formato WebP, que todos esos visores admiten. Si una imagen se moviera en el futuro, abre el enlace de la fuente que aparece debajo.
-> - **Resolución:** las imágenes que se veían borrosas porque su sitio las publicaba reducidas se cambiaron por versiones más grandes. Las ventanas de diálogo de Windows (asistentes, *Propiedades*, *Nuevo objeto*) miden de verdad entre 330 y 500 píxeles de ancho; esas capturas están a su tamaño real y se ven nítidas al 100 %, pero se pixelan si las amplías más, porque no existe una versión más grande.
+> - Cuando una captura difiere de este laboratorio (por ejemplo, un DNS 8.8.8.8, otra versión de Windows Server o una opción distinta marcada), el pie lo indica.
 > - Las capturas que entregues como evidencia (sección 10.7) deben ser **de tu propio laboratorio**.
 ---
 
